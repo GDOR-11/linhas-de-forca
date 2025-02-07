@@ -28,7 +28,7 @@ export function edit_field_line(field_line: FieldLine) {
     new_field_line_pane.addBinding(field_line, "ds", { label: "resolução linear", min: 0 });
     new_field_line_pane.addBinding(field_line, "width", { label: "espessura", min: 0.01 });
     new_field_line_pane.addBinding(field_line, "color", { label: "cor" });
-    new_field_line_pane.addButton({ title: "adicionar" }).on("click", () => new_field_line_pane.dispose());
+    new_field_line_pane.addButton({ title: "terminar" }).on("click", () => new_field_line_pane.dispose());
 }
 
 main_pane.addButton({ title: "nova carga" }).on("click", () => {
