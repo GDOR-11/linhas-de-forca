@@ -1,4 +1,4 @@
-import { Color } from "./render_utils";
+import { Color, screenLength, screenX, screenY } from "./render_utils";
 import { AbstractVector } from "vector2d";
 import { ctx } from "./render_utils";
 import { k } from ".";
@@ -18,7 +18,7 @@ export default class Charge {
     render() {
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.arc(this.pos.x, this.pos.y, this.radius, 0, 2 * Math.PI);
+        ctx.arc(screenX(this.pos.x), screenY(this.pos.y), screenLength(this.radius), 0, 2 * Math.PI);
         ctx.fill();
     }
     getField(s: AbstractVector) {

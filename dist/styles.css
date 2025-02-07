@@ -1,0 +1,16 @@
+#primary-pane {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+#secondary-pane {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+body {
+    overflow: none;
+    margin: 0px;
+}
