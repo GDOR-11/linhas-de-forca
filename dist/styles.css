@@ -13,4 +13,5 @@
 body {
     overflow: none;
     margin: 0px;
+    touch-action: none;
 }
