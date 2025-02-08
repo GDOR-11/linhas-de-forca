@@ -32,15 +32,15 @@ export class FieldLine {
             ctx.beginPath();
             ctx.moveTo(screenX(s.x), screenY(s.y));
             let multiplier = 1;
-            for (let i = 0; i < 1000 && multiplier > 1e-3; i++) {
+            for (let i = 0; i < 1024; i++) {
                 let h = 1e-5;
                 let E = f(s);
                 let E2 = f(s.clone().add(E.clone().mulS(h)));
                 let da_dt = Math.sqrt(2 - 2 * E.dot(E2)) / h;
                 let dt = multiplier * Math.min((this.da / da_dt) || 10, this.ds);
+                if (dt < 1e-3) break;
                 let new_s = RKstep(s, f, dt);
-                let new_E = f(new_s);
-                if (Math.min(E.dot(new_E), E.dot(new_s.clone().subtract(s).normalize())) < 1 - 2 * this.da ** 2) {
+                if (Math.min(E.dot(f(new_s)), E.dot(new_s.clone().subtract(s).normalize())) < 1 - 2 * this.da ** 2) {
                     multiplier /= 2;
                     continue;
                 }

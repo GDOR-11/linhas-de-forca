@@ -4,6 +4,7 @@ import { Vector } from "vector2d";
 import { charges, field, field_lines } from ".";
 import { FieldLine } from "./field_lines";
 import { canvas, ctx, worldX, worldY } from "./render_utils";
+import { saveAs } from "file-saver";
 
 export function edit_charge(charge: Charge) {
     try { secondary_pane?.dispose(); } catch (err) { };
@@ -61,7 +62,8 @@ main_pane.addButton({ title: "nova linha de força" }).on("click", () => {
     field_lines.push(field_line);
     edit_field_line(field_line);
 });
-main_pane.addBinding({ bgc: "#ffffffff" }, "bgc", { label: "cor de fundo" }).on("change", event => canvas.style.backgroundColor = event.value);
+main_pane.addButton({ title: "screenshot" }).on("click", () => canvas.toBlob(blob => saveAs(blob, "linhas de força.png")));
+main_pane.addBinding(canvas.style, "backgroundColor", { label: "cor de fundo" });
 
 let selected_object: null | Charge | FieldLine = null;
 let pointer_coords: [number, number] = [0, 0];

@@ -15,6 +15,8 @@ export function field(s: AbstractVector): AbstractVector {
 
 export function render() {
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    ctx.fillStyle = canvas.style.backgroundColor;
+    ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
     field_lines.forEach(field_line => field_line.render(field));
     charges.forEach(charge => charge.render());
     requestAnimationFrame(render);

@@ -20,6 +20,8 @@
         "webpack-cli": "^6.0.1"
     },
     "dependencies": {
+        "@types/file-saver": "^2.0.7",
+        "file-saver": "^2.0.5",
         "tweakpane": "^4.0.5",
         "vector2d": "^3.0.0"
     }
