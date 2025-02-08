@@ -3,16 +3,10 @@ import Charge from "./charge";
 import { Vector } from "vector2d";
 import { charges, field, field_lines } from ".";
 import { FieldLine } from "./field_lines";
-import { canvas, ctx, screenLength, worldLength, worldX, worldY } from "./render_utils";
-
-const main_pane = new Pane({
-    title: "editar",
-    container: document.getElementById("primary-pane")
-});
-let secondary_pane: null | Pane = null;
+import { canvas, ctx, worldX, worldY } from "./render_utils";
 
 export function edit_charge(charge: Charge) {
-    try { secondary_pane?.dispose(); } catch(err) {};
+    try { secondary_pane?.dispose(); } catch (err) { };
     secondary_pane = new Pane({
         container: document.getElementById("secondary-pane")
     });
@@ -31,7 +25,7 @@ export function edit_charge(charge: Charge) {
     secondary_pane.addButton({ title: "terminar" }).on("click", () => secondary_pane.dispose());
 }
 export function edit_field_line(field_line: FieldLine) {
-    try { secondary_pane?.dispose(); } catch(err) {};
+    try { secondary_pane?.dispose(); } catch (err) { };
     secondary_pane = new Pane({
         container: document.getElementById("secondary-pane")
     });
@@ -51,16 +45,23 @@ export function edit_field_line(field_line: FieldLine) {
     secondary_pane.addButton({ title: "terminar" }).on("click", () => secondary_pane.dispose());
 }
 
+const main_pane = new Pane({
+    title: "editar",
+    container: document.getElementById("primary-pane")
+});
+let secondary_pane: null | Pane = null;
+
 main_pane.addButton({ title: "nova carga" }).on("click", () => {
-    const charge = new Charge(new Vector(0, 0), 1, 2, "#ffffffff");
+    const charge = new Charge(new Vector(0, 0), 1, 2, "#000000ff");
     charges.push(charge);
     edit_charge(charge);
 });
 main_pane.addButton({ title: "nova linha de força" }).on("click", () => {
-    const field_line = new FieldLine(new Vector(0, 0), 0.2, "#ffffffff", 0.01, 10);
+    const field_line = new FieldLine(new Vector(0, 0), 0.2, "#000000ff", 0.01, 10);
     field_lines.push(field_line);
     edit_field_line(field_line);
 });
+main_pane.addBinding({ bgc: "#ffffffff" }, "bgc", { label: "cor de fundo" }).on("change", event => canvas.style.backgroundColor = event.value);
 
 let selected_object: null | Charge | FieldLine = null;
 let pointer_coords: [number, number] = [0, 0];

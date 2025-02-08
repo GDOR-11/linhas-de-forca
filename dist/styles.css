@@ -10,6 +10,10 @@
     right: 10px;
 }
 
+#canvas {
+    background-color: #ffffffff;
+}
+
 body {
     overflow: none;
     margin: 0px;
