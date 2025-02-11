@@ -1,5 +1,7 @@
-import { AbstractVector } from "vector2d";
-import { Color, ctx, screenLength, screenX, screenY } from "./render_utils";
+import { AbstractVector, Vector } from "vector2d";
+import { Color, screenLength, screenX, screenY } from "./render_utils";
+import WorldObject from "./world_object";
+import { field } from ".";
 
 function RKstep(s: AbstractVector, f: (s: AbstractVector) => AbstractVector, dt: number): AbstractVector {
     const k1 = f(s).mulS(dt);
@@ -9,30 +11,48 @@ function RKstep(s: AbstractVector, f: (s: AbstractVector) => AbstractVector, dt:
     return s.clone().add(k1.add(k2.mulS(2)).add(k3.mulS(2)).add(k4).divS(6));
 }
 
-export class FieldLine {
-    anchor_point: AbstractVector;
-    width: number;
-    color: Color;
+export default class FieldLine implements WorldObject {
+    position: AbstractVector;
     da: number;
     ds: number;
+    width: number;
+    color: Color;
+    z_index: number;
+    max_iterations: number;
 
-    constructor(anchor_point: AbstractVector, width: number, color: Color, da: number, ds: number) {
-        this.anchor_point = anchor_point.clone();
+    pane_bindings = {
+        position: {
+            label: "posição inicial",
+            x: { min: screenX(0), max: screenX(window.innerWidth) },
+            y: { min: screenY(0), max: screenY(window.innerHeight) }
+        },
+        da: { label: "resolução angular", min: 0, max: 0.1 },
+        ds: { label: "resolução linear", min: 0, max: 10 },
+        max_iterations: { label: "comprimento", min: 0, max: 10000, step: 1},
+        width: { label: "espessura", min: 0, max: 1 },
+        color: { label: "cor" },
+        z_index: { label: "z-index" }
+    };
+
+    constructor(position: AbstractVector = new Vector(0, 0), da: number = 0.01, ds: number = 10, width: number = 0.25, color: Color = "#000000ff", z_index: number = 1, max_iterations: number = 100) {
+        this.position = position.clone();
         this.width = width;
         this.color = color;
         this.da = da;
         this.ds = ds;
+        this.z_index = z_index;
+        this.max_iterations = max_iterations;
     }
 
-    render(field: (s: AbstractVector) => AbstractVector) {
+    render(ctx: CanvasRenderingContext2D) {
         let integrate = (side: number) => {
             const f = (s: AbstractVector) => field(s).mulS(side).normalize();
 
-            let s = this.anchor_point.clone();
+            let s = this.position.clone();
             ctx.beginPath();
             ctx.moveTo(screenX(s.x), screenY(s.y));
             let multiplier = 1;
-            for (let i = 0; i < 1024; i++) {
+            for (let i = 0; i < this.max_iterations; i++) {
                 let h = 1e-5;
                 let E = f(s);
                 let E2 = f(s.clone().add(E.clone().mulS(h)));
@@ -56,7 +76,6 @@ export class FieldLine {
         ctx.lineCap = "round";
         integrate(1);
         integrate(-1);
-        ctx.strokeRect(screenX(this.anchor_point.x), screenY(this.anchor_point.y), 0.1, 0.1);
-        
+        ctx.strokeRect(screenX(this.position.x), screenY(this.position.y), 0.1, 0.1);
     }
 }
