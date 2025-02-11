@@ -1,7 +1,7 @@
 import { Pane } from "tweakpane";
 import Charge from "./charge";
 import { addObject, field, getObjectAt } from ".";
-import FieldLine from "./field_lines";
+import FieldLine from "./field_line";
 import { canvas, worldX, worldY } from "./render_utils";
 import { saveAs } from "file-saver";
 import WorldObject, { open_editor } from "./world_object";
