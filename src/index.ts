@@ -25,7 +25,7 @@ export function getObjectAt(screen_pos: AbstractVector): WorldObject | null {
     const pixel_changed = () => ctx.getImageData(screen_pos.x, screen_pos.y, 1, 1).data[3] > 0;
     objects.sort((a, b) => Math.sign(b.z_index - a.z_index));
     for (let object of objects) {
-        object.render(ctx);
+        object.render_hitbox(ctx);
         if (pixel_changed()) return object;
     }
     return null;

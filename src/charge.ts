@@ -35,6 +35,12 @@ export default class Charge implements WorldObject {
         ctx.arc(screenX(this.position.x), screenY(this.position.y), screenLength(this.radius), 0, 2 * Math.PI);
         ctx.fill();
     }
+    render_hitbox(ctx: CanvasRenderingContext2D) {
+        let color = this.color;
+        this.color = "#000000ff";
+        this.render(ctx);
+        this.color = color;
+    }
     getField(s: AbstractVector) {
         let d = s.clone().subtract(this.position);
         return d.clone().normalize().mulS(k * this.charge / d.magnitude() ** 2);

@@ -45,4 +45,11 @@ export default class FieldArrow implements WorldObject {
         ctx.lineTo(screenX(C.x), screenY(C.y));
         ctx.stroke();
     }
+    render_hitbox(ctx: CanvasRenderingContext2D) {
+        let color = this.color;
+        this.color = "#000000ff";
+        this.render(ctx);
+        ctx.fill(); // fill the stroked path
+        this.color = color;
+    }
 }

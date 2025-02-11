@@ -58,7 +58,7 @@ export default class FieldLine implements WorldObject {
                 let E2 = f(s.clone().add(E.clone().mulS(h)));
                 let da_dt = Math.sqrt(2 - 2 * E.dot(E2)) / h;
                 let dt = multiplier * Math.min((this.da / da_dt) || 10, this.ds);
-                if (dt < 1e-3) break;
+                if (dt < 1e-5) break;
                 let new_s = RKstep(s, f, dt);
                 if (Math.min(E.dot(f(new_s)), E.dot(new_s.clone().subtract(s).normalize())) < 1 - 2 * this.da ** 2) {
                     multiplier /= 2;
@@ -77,5 +77,13 @@ export default class FieldLine implements WorldObject {
         integrate(1);
         integrate(-1);
         ctx.strokeRect(screenX(this.position.x), screenY(this.position.y), 0.1, 0.1);
+    }
+    render_hitbox(ctx: CanvasRenderingContext2D) {
+        let color = this.color, width = this.width;
+        this.color = "#000000ff";
+        this.width = Math.max(this.width, 0.5);
+        this.render(ctx);
+        this.color = color;
+        this.width = width;
     }
 }

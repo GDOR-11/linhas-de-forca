@@ -7,6 +7,7 @@ export default interface WorldObject {
     position: AbstractVector;
     z_index: number;
     render(ctx: CanvasRenderingContext2D): void;
+    render_hitbox(ctx: CanvasRenderingContext2D): void;
 };
 
 export function open_editor(object: WorldObject, pane_container: HTMLElement): Pane {

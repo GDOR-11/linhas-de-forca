@@ -43,4 +43,20 @@ export default class TextNode implements WorldObject {
         ctx.fillText(this.text, 0, 0);
         ctx.restore();
     }
+    render_hitbox(ctx: CanvasRenderingContext2D) {
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#000000ff";
+        ctx.save();
+        ctx.translate(screenX(this.position.x), screenY(this.position.y));
+        ctx.rotate(-this.angle);
+        ctx.scale(this.size, this.size);
+        let metrics = ctx.measureText(this.text);
+        let left = metrics.actualBoundingBoxLeft;
+        let right = metrics.actualBoundingBoxRight;
+        let up = metrics.actualBoundingBoxAscent;
+        let down = metrics.actualBoundingBoxDescent;
+        ctx.fillRect(-left, -up, left + right, up + down);
+        ctx.restore();
+    }
 }
