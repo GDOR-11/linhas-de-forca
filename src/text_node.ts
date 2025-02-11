@@ -1,5 +1,5 @@
 import { AbstractVector, Vector } from "vector2d";
-import { Color, screenX, screenY } from "./render_utils";
+import { Color, screenX, screenY, worldX, worldY } from "./render_utils";
 import WorldObject from "./world_object";
 
 export default class TextNode implements WorldObject {
@@ -13,8 +13,8 @@ export default class TextNode implements WorldObject {
     pane_bindings = {
         position: {
             label: "posição",
-            x: { min: screenX(0), max: screenX(window.innerWidth) },
-            y: { min: screenY(0), max: screenY(window.innerHeight) }
+            x: { min: worldX(0), max: worldX(window.innerWidth) },
+            y: { min: worldY(0), max: worldY(window.innerHeight) }
         },
         text: { label: "texto" },
         angle: { label: "rotação", min: 0, max: 2 * Math.PI },

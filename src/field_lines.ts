@@ -1,5 +1,5 @@
 import { AbstractVector, Vector } from "vector2d";
-import { Color, screenLength, screenX, screenY } from "./render_utils";
+import { Color, screenLength, screenX, screenY, worldX, worldY } from "./render_utils";
 import WorldObject from "./world_object";
 import { field } from ".";
 
@@ -23,8 +23,8 @@ export default class FieldLine implements WorldObject {
     pane_bindings = {
         position: {
             label: "posição inicial",
-            x: { min: screenX(0), max: screenX(window.innerWidth) },
-            y: { min: screenY(0), max: screenY(window.innerHeight) }
+            x: { min: worldX(0), max: worldX(window.innerWidth) },
+            y: { min: worldY(0), max: worldY(window.innerHeight) }
         },
         da: { label: "resolução angular", min: 0, max: 0.1 },
         ds: { label: "resolução linear", min: 0, max: 10 },

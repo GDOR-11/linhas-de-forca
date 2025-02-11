@@ -1,5 +1,5 @@
 import { AbstractVector, Vector } from "vector2d";
-import { Color, screenLength, screenX, screenY } from "./render_utils";
+import { Color, screenLength, screenX, screenY, worldX, worldY } from "./render_utils";
 import { field } from ".";
 import WorldObject from "./world_object";
 
@@ -13,8 +13,8 @@ export default class FieldArrow implements WorldObject {
     pane_bindings = {
         position: {
             label: "posição",
-            x: { min: screenX(0), max: screenX(window.innerWidth) },
-            y: { min: screenY(0), max: screenY(window.innerHeight) }
+            x: { min: worldX(0), max: worldX(window.innerWidth) },
+            y: { min: worldY(0), max: worldY(window.innerHeight) }
         },
         size: { label: "tamanho", min: 0 },
         color: { label: "cor" },
