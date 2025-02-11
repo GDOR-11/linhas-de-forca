@@ -34,7 +34,7 @@ export default class FieldLine implements WorldObject {
         z_index: { label: "z-index" }
     };
 
-    constructor(position: AbstractVector = new Vector(0, 0), da: number = 0.01, ds: number = 10, width: number = 0.25, color: Color = "#000000ff", z_index: number = 1, max_iterations: number = 100) {
+    constructor(position: AbstractVector = new Vector(0, 0), da: number = 0.01, ds: number = 10, width: number = 0.25, color: Color = "#000000ff", z_index: number = 0, max_iterations: number = 1000) {
         this.position = position.clone();
         this.width = width;
         this.color = color;

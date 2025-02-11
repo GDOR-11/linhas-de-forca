@@ -22,7 +22,7 @@ export default class Charge implements WorldObject {
         z_index: { label: "z-index" }
     };
 
-    constructor(position: AbstractVector = new Vector(0, 0), charge: number = 1, radius: number = 1, color: Color = "#000000ff", z_index: number = 0) {
+    constructor(position: AbstractVector = new Vector(0, 0), charge: number = 1, radius: number = 1, color: Color = "#000000ff", z_index: number = 1) {
         this.position = position;
         this.charge = charge;
         this.radius = radius;
