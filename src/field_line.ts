@@ -28,7 +28,7 @@ export default class FieldLine implements WorldObject {
             y: { min: worldY(0), max: worldY(window.innerHeight) }
         },
         da: { label: "resolução angular", min: 0.001, max: 0.1, step: 0.001 },
-        ds: { label: "resolução linear", min: 0, max: 10 },
+        ds: { label: "resolução linear", min: 0.1, max: 10, step: 0.1 },
         max_iterations: { label: "comprimento", min: 0, max: 10000, step: 1},
         width: { label: "espessura", min: 0.01, step: 0.01 },
         color: { label: "cor" },
