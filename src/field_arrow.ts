@@ -6,6 +6,7 @@ import WorldObject from "./world_object";
 export default class FieldArrow implements WorldObject {
     position: AbstractVector;
     size: number;
+    angle: number;
     color: Color;
     width: number;
     z_index: number;
@@ -18,14 +19,16 @@ export default class FieldArrow implements WorldObject {
             y: { min: worldY(0), max: worldY(window.innerHeight) }
         },
         size: { label: "tamanho", min: 0.1, step: 0.1 },
+        angle: { label: "abertura", min: 0.01, max: 3.14, step: 0.01 },
         color: { label: "cor" },
         width: { label: "espessura", min: 0.01, step: 0.01 },
         z_index: { label: "z-index", step: 0.1 }
     };
     
-    constructor(position: AbstractVector = new Vector(0, 0), size: number = 1, color: Color = "#000000ff", width: number = 0.1, z_index: number = 2) {
+    constructor(position: AbstractVector = new Vector(0, 0), size: number = 1, angle: number = 1.05, color: Color = "#000000ff", width: number = 0.1, z_index: number = 2) {
         this.position = position;
         this.size = size;
+        this.angle = angle;
         this.color = color;
         this.width = width;
         this.z_index = z_index;
@@ -33,8 +36,8 @@ export default class FieldArrow implements WorldObject {
 
     render(ctx: CanvasRenderingContext2D) {
         let direction = field(this.position).normalize().mulS(this.size);
-        let B = this.position.clone().add(direction.rotate(5 * Math.PI / 6));
-        let C = this.position.clone().add(direction.rotate(Math.PI / 3));
+        let B = this.position.clone().add(direction.clone().rotate(Math.PI + this.angle / 2));
+        let C = this.position.clone().add(direction.clone().rotate(Math.PI - this.angle / 2));
 
         ctx.strokeStyle = this.color;
         ctx.lineJoin = "round";
