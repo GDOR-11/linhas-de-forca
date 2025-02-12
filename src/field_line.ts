@@ -23,15 +23,16 @@ export default class FieldLine implements WorldObject {
     pane_bindings = {
         position: {
             label: "posição inicial",
+            step: 0.01,
             x: { min: worldX(0), max: worldX(window.innerWidth) },
             y: { min: worldY(0), max: worldY(window.innerHeight) }
         },
-        da: { label: "resolução angular", min: 0, max: 0.1 },
+        da: { label: "resolução angular", min: 0.001, max: 0.1, step: 0.001 },
         ds: { label: "resolução linear", min: 0, max: 10 },
         max_iterations: { label: "comprimento", min: 0, max: 10000, step: 1},
-        width: { label: "espessura", min: 0, max: 1 },
+        width: { label: "espessura", min: 0.01, step: 0.01 },
         color: { label: "cor" },
-        z_index: { label: "z-index" }
+        z_index: { label: "z-index", step: 0.1 }
     };
 
     constructor(position: AbstractVector = new Vector(0, 0), da: number = 0.01, ds: number = 10, width: number = 0.25, color: Color = "#000000ff", z_index: number = 0, max_iterations: number = 1000) {

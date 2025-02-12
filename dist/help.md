@@ -1,2 +1,12 @@
-hello
-=====
+manual
+======
+
+para editar um objeto já adicionado, clique nele para abrir o painel de edição. Se quiser mudar apenas a sua posição, basta arrastá-lo com o mouse.
+
+as principais configurações que podem causar confusão são:
+- z-index: essa propriedade define quais objetos aparecem em cima de outros. Um objeto com z-index maior aparece na frente.
+- resolução angular: é um dos parâmetros que define a qualidade de uma linha de força. Quanto menor a resolução angular, mais precisa e visualmente suave a linha de força.
+- resolução linear: outro parâmetro que define a qualidade de uma linha de força. Valores muito grandes podem causar erros visuais.
+- comprimento: controla o tamanho da linha de força. Quando menores as resoluções linear e angular, maior esse valor deve ser. Valores muito grandes podem causar lentidão.
+
+quando estiver satisfeito com a imagem gerada, clique em "screenshot" no menu editar para salvar a imagem.

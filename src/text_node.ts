@@ -13,14 +13,15 @@ export default class TextNode implements WorldObject {
     pane_bindings = {
         position: {
             label: "posição",
+            step: 0.01,
             x: { min: worldX(0), max: worldX(window.innerWidth) },
             y: { min: worldY(0), max: worldY(window.innerHeight) }
         },
         text: { label: "texto" },
-        angle: { label: "rotação", min: 0, max: 2 * Math.PI },
-        size: { label: "tamanho", min: 0 },
+        angle: { label: "rotação", min: 0, step: 0.01, max: 6.28 },
+        size: { label: "tamanho", min: 0.1, step: 0.1 },
         color: { label: "cor" },
-        z_index: { label: "z-index" }
+        z_index: { label: "z-index", step: 0.1 }
     };
 
     constructor(text: string = "", position: AbstractVector = new Vector(0, 0), angle: number = 0, size: number = 1, color: Color = "#000000ff", z_index: number = 3) {

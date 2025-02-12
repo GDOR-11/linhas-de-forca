@@ -13,13 +13,14 @@ export default class Charge implements WorldObject {
     pane_bindings = {
         position: {
             label: "posição",
+            step: 0.01,
             x: { min: worldX(0), max: worldX(window.innerWidth) },
             y: { min: worldY(0), max: worldY(window.innerHeight) }
         },
-        charge: { label: "carga" },
-        radius: { label: "raio", min: 0 },
+        charge: { label: "carga", step: 0.1 },
+        radius: { label: "raio", min: 0.1, step: 0.1 },
         color: { label: "cor" },
-        z_index: { label: "z-index" }
+        z_index: { label: "z-index", step: 0.1 }
     };
 
     constructor(position: AbstractVector = new Vector(0, 0), charge: number = 1, radius: number = 1, color: Color = "#000000ff", z_index: number = 1) {

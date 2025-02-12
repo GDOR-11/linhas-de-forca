@@ -13,13 +13,14 @@ export default class FieldArrow implements WorldObject {
     pane_bindings = {
         position: {
             label: "posição",
+            step: 0.01,
             x: { min: worldX(0), max: worldX(window.innerWidth) },
             y: { min: worldY(0), max: worldY(window.innerHeight) }
         },
-        size: { label: "tamanho", min: 0 },
+        size: { label: "tamanho", min: 0.1, step: 0.1 },
         color: { label: "cor" },
-        width: { label: "espessura", min: 0 },
-        z_index: { label: "z-index" }
+        width: { label: "espessura", min: 0.01, step: 0.01 },
+        z_index: { label: "z-index", step: 0.1 }
     };
     
     constructor(position: AbstractVector = new Vector(0, 0), size: number = 1, color: Color = "#000000ff", width: number = 0.1, z_index: number = 2) {

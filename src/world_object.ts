@@ -19,11 +19,11 @@ export function open_editor(object: WorldObject, pane_container: HTMLElement): P
         // alert(key + " accepted as " + object[key] + " with settings " + JSON.stringify());
         pane.addBinding(object, key as keyof object, object.pane_bindings[key]);
     }
-    pane.addButton({ title: "remover" }).on("click", () => {
+    pane.addButton({ title: "remover objeto" }).on("click", () => {
         removeObject(object);
         pane.dispose();
     });
-    pane.addButton({ title: "terminar" }).on("click", () => pane.dispose());
+    pane.addButton({ title: "fechar painel" }).on("click", () => pane.dispose());
 
     return pane;
 }

@@ -22,8 +22,14 @@
     mix-blend-mode: difference;
 }
 
+/* the link was unclickable and I could not figure out why after an hour of searching online */
+/* only to enter this file, get this sugestion by copilot and witness the link suddenly working */
+#help-button-icon {
+    pointer-events: none;
+}
+
 body {
-    overflow: none;
+    overflow: hidden;
     margin: 0px;
     touch-action: none;
 }
