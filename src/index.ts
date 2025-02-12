@@ -33,7 +33,7 @@ export function getObjectAt(screen_pos: AbstractVector): WorldObject | null {
 
 export function render() {
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    ctx.fillStyle = canvas.style.backgroundColor;
+    ctx.fillStyle = document.body.style.backgroundColor;
     ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
     objects.sort((a, b) => Math.sign(a.z_index - b.z_index));
     objects.forEach(object => object.render(ctx));

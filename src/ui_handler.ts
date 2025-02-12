@@ -1,6 +1,6 @@
 import { Pane } from "tweakpane";
 import Charge from "./charge";
-import { addObject, field, getObjectAt } from ".";
+import { addObject, getObjectAt } from ".";
 import FieldLine from "./field_line";
 import { canvas, worldX, worldY } from "./render_utils";
 import { saveAs } from "file-saver";
@@ -29,26 +29,26 @@ main_pane.addButton({ title: "nova linha de força" }).on("click", () => create_
 main_pane.addButton({ title: "nova seta de campo" }).on("click", () => create_object(new FieldArrow()));
 main_pane.addButton({ title: "novo texto" }).on("click", () => create_object(new TextNode()));
 main_pane.addButton({ title: "screenshot" }).on("click", () => canvas.toBlob(blob => saveAs(blob, "linhas de força.png")));
-main_pane.addBinding(canvas.style, "backgroundColor", { label: "cor de fundo" });
-
+main_pane.addBinding(document.body.style, "backgroundColor", { label: "cor de fundo" });
 
 
 let selected_object: null | WorldObject = null;
-let pointer: AbstractVector = new Vector(0, 0);
+let total_pointer_distance = 0;
 
 canvas.onpointerdown = event => {
-    pointer = new Vector(event.x, event.y);
-    selected_object = getObjectAt(pointer);
+    total_pointer_distance = 0;
+    selected_object = getObjectAt(new Vector(event.x, event.y));
 };
 
 canvas.onpointermove = event => {
-    if (new Vector(event.x, event.y).subtract(pointer).magnitude() < 10) return;
+    total_pointer_distance += Math.hypot(event.movementX, event.movementY);
+    if (total_pointer_distance < 10) return;
     if (selected_object === null) return;
     selected_object.position = new Vector(worldX(event.x), worldY(event.y))
 };
 
-window.onpointerup = event => {
-    if (new Vector(event.x, event.y).subtract(pointer).magnitude() < 10 && selected_object !== null) {
+window.onpointerup = () => {
+    if (total_pointer_distance < 10 && selected_object !== null) {
         edit_object(selected_object);
     }
     selected_object = null;
