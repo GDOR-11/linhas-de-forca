@@ -1,6 +1,6 @@
 import { AbstractVector, Vector } from "vector2d";
 import Charge from "./charge";
-import { canvas, ctx } from "./render_utils";
+import { ctx } from "./render_utils";
 import "./ui_handler";
 import WorldObject from "./world_object";
 
@@ -18,6 +18,9 @@ export function removeObject(object: WorldObject) {
 
 export function field(s: AbstractVector): AbstractVector {
     return objects.filter(object => object instanceof Charge).reduce((a, b) => a.add(b.getField(s)), new Vector(0, 0));
+}
+export function potential(s: AbstractVector): number {
+    return objects.filter(object => object instanceof Charge).reduce((a, b) => a + b.getPotential(s), 0);
 }
 
 export function getObjectAt(screen_pos: AbstractVector): WorldObject | null {

@@ -23,7 +23,7 @@ export default class Charge implements WorldObject {
         z_index: { label: "z-index", step: 0.1 }
     };
 
-    constructor(position: AbstractVector = new Vector(0, 0), charge: number = 1, radius: number = 1, color: Color = "#000000ff", z_index: number = 1) {
+    constructor(position: AbstractVector = new Vector(0, 0), charge: number = 1, radius: number = 1, color: Color = "#000000ff", z_index: number = 2) {
         this.position = position;
         this.charge = charge;
         this.radius = radius;
@@ -45,5 +45,8 @@ export default class Charge implements WorldObject {
     getField(s: AbstractVector) {
         let d = s.clone().subtract(this.position);
         return d.clone().normalize().mulS(k * this.charge / d.magnitude() ** 2);
+    }
+    getPotential(s: AbstractVector) {
+        return k * this.charge / this.position.distance(s);
     }
 }

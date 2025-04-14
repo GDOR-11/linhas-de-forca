@@ -7,7 +7,8 @@ import { saveAs } from "file-saver";
 import WorldObject, { open_editor } from "./world_object";
 import FieldArrow from "./field_arrow";
 import TextNode from "./text_node";
-import { AbstractVector, Vector } from "vector2d";
+import { Vector } from "vector2d";
+import Equipotential from "./equipotential";
 
 const main_pane = new Pane({
     title: "editar",
@@ -26,6 +27,7 @@ function create_object(object: WorldObject) {
 
 main_pane.addButton({ title: "nova carga" }).on("click", () => create_object(new Charge()));
 main_pane.addButton({ title: "nova linha de força" }).on("click", () => create_object(new FieldLine));
+main_pane.addButton({ title: "nova equipotencial" }).on("click", () => create_object(new Equipotential));
 main_pane.addButton({ title: "nova seta de campo" }).on("click", () => create_object(new FieldArrow()));
 main_pane.addButton({ title: "novo texto" }).on("click", () => create_object(new TextNode()));
 main_pane.addButton({ title: "screenshot" }).on("click", () => canvas.toBlob(blob => saveAs(blob, "linhas de força.png")));

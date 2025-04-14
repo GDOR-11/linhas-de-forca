@@ -24,7 +24,7 @@ export default class TextNode implements WorldObject {
         z_index: { label: "z-index", step: 0.1 }
     };
 
-    constructor(text: string = "", position: AbstractVector = new Vector(0, 0), angle: number = 0, size: number = 1, color: Color = "#000000ff", z_index: number = 3) {
+    constructor(text: string = "", position: AbstractVector = new Vector(0, 0), angle: number = 0, size: number = 1, color: Color = "#000000ff", z_index: number = 4) {
         this.text = text;
         this.position = position;
         this.angle = angle;
